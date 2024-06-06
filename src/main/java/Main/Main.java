@@ -1,6 +1,5 @@
 package Main;
 
-import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import menu.MenuItem;
@@ -19,7 +18,7 @@ public class Main extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         excute();
     }
-    
+        
     
     private void excute(){
         
@@ -38,53 +37,75 @@ public class Main extends javax.swing.JFrame {
         for(int i=0; i<menu.length; i++){
             menus.add(menu[i]);
         }
+        menus.revalidate();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        topPanel = new javax.swing.JPanel();
         mainMenu = new javax.swing.JPanel();
+        logoPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         menus = new javax.swing.JPanel();
+        settingPanel = new javax.swing.JPanel();
         bodyPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        topPanel.setBackground(new java.awt.Color(70, 130, 248));
-        topPanel.setPreferredSize(new java.awt.Dimension(734, 50));
-
-        javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
-        topPanel.setLayout(topPanelLayout);
-        topPanelLayout.setHorizontalGroup(
-            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1016, Short.MAX_VALUE)
-        );
-        topPanelLayout.setVerticalGroup(
-            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(topPanel, java.awt.BorderLayout.PAGE_START);
-
         mainMenu.setBackground(new java.awt.Color(102, 99, 244));
         mainMenu.setPreferredSize(new java.awt.Dimension(250, 449));
 
+        logoPanel.setBackground(new java.awt.Color(153, 153, 153));
+        logoPanel.setBorder(null);
+
+        javax.swing.GroupLayout logoPanelLayout = new javax.swing.GroupLayout(logoPanel);
+        logoPanel.setLayout(logoPanelLayout);
+        logoPanelLayout.setHorizontalGroup(
+            logoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        logoPanelLayout.setVerticalGroup(
+            logoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
+
         jScrollPane1.setBorder(null);
 
+        menus.setBorder(null);
         menus.setLayout(new javax.swing.BoxLayout(menus, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(menus);
+
+        settingPanel.setBackground(new java.awt.Color(102, 102, 102));
+        settingPanel.setBorder(null);
+
+        javax.swing.GroupLayout settingPanelLayout = new javax.swing.GroupLayout(settingPanel);
+        settingPanel.setLayout(settingPanelLayout);
+        settingPanelLayout.setHorizontalGroup(
+            settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        settingPanelLayout.setVerticalGroup(
+            settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 93, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout mainMenuLayout = new javax.swing.GroupLayout(mainMenu);
         mainMenu.setLayout(mainMenuLayout);
         mainMenuLayout.setHorizontalGroup(
             mainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addComponent(logoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(settingPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         mainMenuLayout.setVerticalGroup(
             mainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainMenuLayout.createSequentialGroup()
+                .addComponent(logoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(settingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(mainMenu, java.awt.BorderLayout.LINE_START);
@@ -99,12 +120,12 @@ public class Main extends javax.swing.JFrame {
         );
         bodyPanelLayout.setVerticalGroup(
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
 
         getContentPane().add(bodyPanel, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(1032, 538));
+        setSize(new java.awt.Dimension(1032, 547));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -120,8 +141,9 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bodyPanel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel logoPanel;
     private javax.swing.JPanel mainMenu;
     private javax.swing.JPanel menus;
-    private javax.swing.JPanel topPanel;
+    private javax.swing.JPanel settingPanel;
     // End of variables declaration//GEN-END:variables
 }
