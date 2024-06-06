@@ -1,13 +1,18 @@
 package Main;
 
+import inventory_team.ReceivePage;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import menu.MenuItem;
+import menu.SettingItem;
 
 /**
  *
- * @author Vitamin
+ * @author CallPC-Speed
  */
 public class Main extends javax.swing.JFrame {
 
@@ -26,20 +31,31 @@ public class Main extends javax.swing.JFrame {
         ImageIcon iconLogo = new ImageIcon("logo.png");
         Iblogo.setIcon(iconLogo);
         
-        //craete super menu
-        ImageIcon iconDashboard = new ImageIcon("dashboard.png");
-        ImageIcon iconInventory = new ImageIcon("inventory.png");
+        //setting icons
+        ImageIcon iconDashboard = new ImageIcon("dashboard.gif");
+        ImageIcon iconInventory = new ImageIcon("inventory.gif");
         ImageIcon iconSubMenu = new ImageIcon("subMenu.png");
+        ImageIcon iconSetting = new ImageIcon("setting.gif");
         
         //create submenu
+        MenuItem menuInventory1 = new MenuItem(iconSubMenu, "Release", new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bodyPanel.add(new ReceivePage());
+                bodyPanel.revalidate();
+            }
+            
+        });
+        MenuItem menuInventory2 = new MenuItem(iconSubMenu, "Receive", null);
+        MenuItem menuInventory3 = new MenuItem(iconSubMenu, "Destruction", null);
         
-        MenuItem menuInventory1 = new MenuItem(iconSubMenu, "Release");
-        MenuItem menuInventory2 = new MenuItem(iconSubMenu, "Receive");
-        MenuItem menuInventory3 = new MenuItem(iconSubMenu, "Destruction");
         
-        MenuItem menuDashboard = new MenuItem(iconDashboard, "Dashboard" );
-        MenuItem menuInventory = new MenuItem(iconInventory, "Inventory", menuInventory1, menuInventory2, menuInventory3);
+        //craete super menu
+        MenuItem menuDashboard = new MenuItem(iconDashboard, "Dashboard" , null);
+        MenuItem menuInventory = new MenuItem(iconInventory, "Inventory", null, menuInventory1, menuInventory2, menuInventory3);
+        SettingItem menuSetting = new SettingItem(iconSetting, "Setting");
         
+        addSettingMenu(menuSetting);
         addMenu(menuDashboard,menuInventory);
     }
     
@@ -53,7 +69,11 @@ public class Main extends javax.swing.JFrame {
         }
         menus.revalidate();
     }
-
+    
+    private void addSettingMenu(SettingItem menu){
+        settingPanel.add(menu);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -69,6 +89,7 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         mainMenu.setBackground(new java.awt.Color(102, 99, 244));
+        mainMenu.setBorder(null);
         mainMenu.setPreferredSize(new java.awt.Dimension(250, 449));
 
         logoPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -96,11 +117,12 @@ public class Main extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
+        menus.setBackground(new java.awt.Color(255, 255, 255));
         menus.setBorder(null);
         menus.setLayout(new javax.swing.BoxLayout(menus, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(menus);
 
-        settingPanel.setBackground(new java.awt.Color(102, 102, 102));
+        settingPanel.setBackground(new java.awt.Color(255, 255, 255));
         settingPanel.setBorder(null);
 
         javax.swing.GroupLayout settingPanelLayout = new javax.swing.GroupLayout(settingPanel);
@@ -111,7 +133,7 @@ public class Main extends javax.swing.JFrame {
         );
         settingPanelLayout.setVerticalGroup(
             settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 55, Short.MAX_VALUE)
+            .addGap(0, 94, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout mainMenuLayout = new javax.swing.GroupLayout(mainMenu);
@@ -127,14 +149,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainMenuLayout.createSequentialGroup()
                 .addComponent(logoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(settingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(settingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(mainMenu, java.awt.BorderLayout.LINE_START);
 
-        bodyPanel.setBackground(new java.awt.Color(239, 241, 245));
+        bodyPanel.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
         bodyPanel.setLayout(bodyPanelLayout);
