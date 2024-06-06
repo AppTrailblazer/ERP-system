@@ -1,5 +1,6 @@
 package Main;
 
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import menu.MenuItem;
@@ -21,21 +22,34 @@ public class Main extends javax.swing.JFrame {
         
     
     private void excute(){
+        //logo setting
+        ImageIcon iconLogo = new ImageIcon("logo.png");
+        Iblogo.setIcon(iconLogo);
         
+        //craete super menu
         ImageIcon iconDashboard = new ImageIcon("dashboard.png");
         ImageIcon iconInventory = new ImageIcon("inventory.png");
         ImageIcon iconSubMenu = new ImageIcon("subMenu.png");
         
-        MenuItem menuDashboard = new MenuItem(iconDashboard, "Staff Manegement");
-        MenuItem menuInventory = new MenuItem(iconInventory, "Staff Manegement");
-        MenuItem menuSubMenu = new MenuItem(iconSubMenu, "Staff Manegement");
+        //create submenu
         
-        addMenu(menuDashboard,menuInventory, menuSubMenu);
+        MenuItem menuInventory1 = new MenuItem(iconSubMenu, "Release");
+        MenuItem menuInventory2 = new MenuItem(iconSubMenu, "Receive");
+        MenuItem menuInventory3 = new MenuItem(iconSubMenu, "Destruction");
+        
+        MenuItem menuDashboard = new MenuItem(iconDashboard, "Dashboard" );
+        MenuItem menuInventory = new MenuItem(iconInventory, "Inventory", menuInventory1, menuInventory2, menuInventory3);
+        
+        addMenu(menuDashboard,menuInventory);
     }
     
     private void addMenu(MenuItem...menu){
         for(int i=0; i<menu.length; i++){
             menus.add(menu[i]);
+            ArrayList<MenuItem>subMenu = menu[i].getSubMenu();
+            for(MenuItem m : subMenu){
+                addMenu(m);
+            }
         }
         menus.revalidate();
     }
@@ -46,6 +60,7 @@ public class Main extends javax.swing.JFrame {
 
         mainMenu = new javax.swing.JPanel();
         logoPanel = new javax.swing.JPanel();
+        Iblogo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         menus = new javax.swing.JPanel();
         settingPanel = new javax.swing.JPanel();
@@ -56,21 +71,30 @@ public class Main extends javax.swing.JFrame {
         mainMenu.setBackground(new java.awt.Color(102, 99, 244));
         mainMenu.setPreferredSize(new java.awt.Dimension(250, 449));
 
-        logoPanel.setBackground(new java.awt.Color(153, 153, 153));
+        logoPanel.setBackground(new java.awt.Color(255, 255, 255));
         logoPanel.setBorder(null);
+
+        Iblogo.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout logoPanelLayout = new javax.swing.GroupLayout(logoPanel);
         logoPanel.setLayout(logoPanelLayout);
         logoPanelLayout.setHorizontalGroup(
             logoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logoPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Iblogo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         logoPanelLayout.setVerticalGroup(
             logoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 77, Short.MAX_VALUE)
+            .addGroup(logoPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(Iblogo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         menus.setBorder(null);
         menus.setLayout(new javax.swing.BoxLayout(menus, javax.swing.BoxLayout.Y_AXIS));
@@ -87,7 +111,7 @@ public class Main extends javax.swing.JFrame {
         );
         settingPanelLayout.setVerticalGroup(
             settingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 93, Short.MAX_VALUE)
+            .addGap(0, 55, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout mainMenuLayout = new javax.swing.GroupLayout(mainMenu);
@@ -103,7 +127,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainMenuLayout.createSequentialGroup()
                 .addComponent(logoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(settingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -139,6 +163,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Iblogo;
     private javax.swing.JPanel bodyPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel logoPanel;

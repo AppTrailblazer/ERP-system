@@ -33,6 +33,7 @@ public class MenuItem extends javax.swing.JPanel {
         
         for(int i =0; i<subMenu.length; i++){
             this.subMenu.add(subMenu[i]);
+            subMenu[i].setVisible(false);
         }
     }
 
@@ -105,7 +106,7 @@ public class MenuItem extends javax.swing.JPanel {
         new Thread(new Runnable(){
             
             public void run(){
-                for(int i = 0; i< subMenu.size()-1; i--){
+                for(int i = subMenu.size()-1; i>=0; i--){
                     sleep();
                     subMenu.get(i).setVisible(false);
                 }
