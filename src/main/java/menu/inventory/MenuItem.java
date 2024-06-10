@@ -1,4 +1,4 @@
-package menu;
+package menu.inventory;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -53,7 +53,7 @@ public class MenuItem extends javax.swing.JPanel {
         menuIcon = new javax.swing.JLabel();
         itemName = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(153, 204, 255));
 
         itemName.setText("Dashboard");
         itemName.addMouseListener(new java.awt.event.MouseAdapter() {

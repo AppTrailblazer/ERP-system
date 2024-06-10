@@ -1,14 +1,18 @@
 package Main;
 
-import inventory_team.ReceivePage;
+import inventory_team.CreateInventoryPage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import menu.MenuItem;
+import menu.inventory.MenuItem;
+import inventory_team.ReceivePage;
+import inventory_team.ReleasePage;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 import menu.SettingItem;
+import menu.inventory.CreateInventoryItem;
 
 /**
  *
@@ -37,37 +41,70 @@ public class Main extends javax.swing.JFrame {
         ImageIcon iconSubMenu = new ImageIcon("subMenu.png");
         ImageIcon iconSetting = new ImageIcon("setting.gif");
         
+        //Create instances of the pages
+        JPanel receivePage = new ReceivePage();
+        JPanel releasePage = new ReleasePage();
+        JPanel CreateInventoryPage = new CreateInventoryPage();
+        
+        //Add the pages to the bodyPanel with unique identifiers
+        bodyPanel.add(receivePage, "ReceivePage");
+        bodyPanel.add(releasePage, "ReleasePage");
+        bodyPanel.add(CreateInventoryPage, "CreateInventoryPage");
+        
         //create submenu
-        MenuItem menuInventory1 = new MenuItem(iconSubMenu, "Release", new ActionListener(){
+        MenuItem menuInventory1 = new MenuItem(iconSubMenu, "Receive", new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                bodyPanel.add(new ReceivePage());
-                bodyPanel.revalidate();
+                CardLayout cl = (CardLayout) (bodyPanel.getLayout());
+                cl.show(bodyPanel, "ReceivePage");
             }
             
         });
-        MenuItem menuInventory2 = new MenuItem(iconSubMenu, "Receive", null);
+        MenuItem menuInventory2 = new MenuItem(iconSubMenu, "Release", new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) (bodyPanel.getLayout());
+                cl.show(bodyPanel, "ReleasePage");
+           
+            }
+            
+        });
         MenuItem menuInventory3 = new MenuItem(iconSubMenu, "Destruction", null);
         
         
         //craete super menu
         MenuItem menuDashboard = new MenuItem(iconDashboard, "Dashboard" , null);
         MenuItem menuInventory = new MenuItem(iconInventory, "Inventory", null, menuInventory1, menuInventory2, menuInventory3);
+        MenuItem menuInventorysecond = new MenuItem(iconInventory, "Inventory2", null);
         SettingItem menuSetting = new SettingItem(iconSetting, "Setting");
+        CreateInventoryItem btnCreateInventory = new CreateInventoryItem(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) (bodyPanel.getLayout());
+                cl.show(bodyPanel, "CreateInventoryPage");
+            }
+        });
         
         addSettingMenu(menuSetting);
-        addMenu(menuDashboard,menuInventory);
+        addMenu(menuDashboard,menuInventory,menuInventorysecond);
+        addBtnCreateInventory(btnCreateInventory);
+        
     }
     
     private void addMenu(MenuItem...menu){
+        
         for(int i=0; i<menu.length; i++){
-            menus.add(menu[i]);
+            menuInventory.add(menu[i]);
             ArrayList<MenuItem>subMenu = menu[i].getSubMenu();
             for(MenuItem m : subMenu){
                 addMenu(m);
             }
         }
-        menus.revalidate();
+        menuInventory.revalidate();
+    }
+    
+    private void addBtnCreateInventory(CreateInventoryItem btn){
+        menuInventory.add(btn);
     }
     
     private void addSettingMenu(SettingItem menu){
@@ -82,7 +119,7 @@ public class Main extends javax.swing.JFrame {
         logoPanel = new javax.swing.JPanel();
         Iblogo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        menus = new javax.swing.JPanel();
+        menuInventory = new javax.swing.JPanel();
         settingPanel = new javax.swing.JPanel();
         bodyPanel = new javax.swing.JPanel();
 
@@ -117,10 +154,10 @@ public class Main extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        menus.setBackground(new java.awt.Color(255, 255, 255));
-        menus.setBorder(null);
-        menus.setLayout(new javax.swing.BoxLayout(menus, javax.swing.BoxLayout.Y_AXIS));
-        jScrollPane1.setViewportView(menus);
+        menuInventory.setBackground(new java.awt.Color(204, 204, 204));
+        menuInventory.setBorder(null);
+        menuInventory.setLayout(new javax.swing.BoxLayout(menuInventory, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane1.setViewportView(menuInventory);
 
         settingPanel.setBackground(new java.awt.Color(255, 255, 255));
         settingPanel.setBorder(null);
@@ -140,7 +177,7 @@ public class Main extends javax.swing.JFrame {
         mainMenu.setLayout(mainMenuLayout);
         mainMenuLayout.setHorizontalGroup(
             mainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
             .addComponent(logoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(settingPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -149,7 +186,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainMenuLayout.createSequentialGroup()
                 .addComponent(logoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addGap(0, 0, 0)
                 .addComponent(settingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -157,18 +194,7 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(mainMenu, java.awt.BorderLayout.LINE_START);
 
         bodyPanel.setBackground(new java.awt.Color(204, 204, 204));
-
-        javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
-        bodyPanel.setLayout(bodyPanelLayout);
-        bodyPanelLayout.setHorizontalGroup(
-            bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 766, Short.MAX_VALUE)
-        );
-        bodyPanelLayout.setVerticalGroup(
-            bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 508, Short.MAX_VALUE)
-        );
-
+        bodyPanel.setLayout(new java.awt.CardLayout());
         getContentPane().add(bodyPanel, java.awt.BorderLayout.CENTER);
 
         setSize(new java.awt.Dimension(1032, 547));
@@ -190,7 +216,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel logoPanel;
     private javax.swing.JPanel mainMenu;
-    private javax.swing.JPanel menus;
+    private javax.swing.JPanel menuInventory;
     private javax.swing.JPanel settingPanel;
     // End of variables declaration//GEN-END:variables
 }
